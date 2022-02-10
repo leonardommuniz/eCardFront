@@ -5,6 +5,12 @@
 <script>
 export default {
   name: 'App',
+  created() {
+    this.axios.get('http://127.0.0.1:8000/api/person')
+    .then((response) => {
+      console.log(response.data.data);
+    })
+  },
 }
 </script>
 
