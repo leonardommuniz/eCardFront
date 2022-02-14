@@ -4,4 +4,9 @@
   </h1>
 </template>
 
-<script src="./main.js"></script>
+<script>
+export default {
+  name: 'SocialLinks',
+
+  }
+</script>

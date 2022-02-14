@@ -17,12 +17,12 @@
                   <th
                     class="w-1/6 min-w-[160px] text-lg font-semibold text-white py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent"
                   >
-                    Identificador do card
+                    Identificador do Usuario
                   </th>
                   <th
                     class="w-1/6 min-w-[160px] text-lg font-semibold text-white py-4 lg:py-7 px-3 lg:px-4"
                   >
-                    Data de Criação do card
+                    Nome do Usuario
                   </th>
                   <th
                     class="w-1/6 min-w-[160px] text-lg font-semibold text-white py-4 lg:py-7 px-3 lg:px-4"
@@ -31,27 +31,47 @@
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody v-for="user of users" :key="user.id">
                 <tr>
                   <td
                     class="text-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]"
                   >
-                    .com
+                    {{ user.id }}
                   </td>
                   <td
                     class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]"
                   >
-                    1 Year
+                    {{ user.name }}
                   </td>
                   <td
-                    class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-r border-[#E8E8E8]"
+                    class="space-x-0.5 text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-r border-[#E8E8E8]"
                   >
-                    <a
-                      href=""
-                      class="border-2 border-blue-500 rounded-lg font-bold text-blue-500 px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-500 hover:text-white"
+                    <button
+                      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
-                      Click here
-                    </a>
+                      <svg class="h-4 w-4 text-white hover:text-blue-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                      </svg>
+
+                    </button>
+
+                    <button
+                      class="bg-blue-500 hover:bg-blue-700 hover:text-blue-500 text-white font-bold py-2 px-4 rounded"
+                    >
+                      <svg class="h-4 w-4 text-white hover:text-blue-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                      </svg>
+
+                    </button>
+
+                    <button
+                      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      <svg class="h-4 w-4 text-white hover:text-blue-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                      </svg>
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -63,3 +83,22 @@
   </section>
   <!-- ====== Table Section End -->
 </template>
+
+<script>
+import axios from 'axios'
+export default {
+    name: 'TableCards',
+    data() {
+      return {
+        users: [],
+      }
+    },
+    created() {
+      axios.get('http://127.0.0.1:8000/api/person')
+      .then((response) => {
+        this.users = response.data.data;
+        console.log(response.data.data);
+      })
+    },
+  }
+</script>
