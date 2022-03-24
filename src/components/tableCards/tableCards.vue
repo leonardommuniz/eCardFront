@@ -65,6 +65,7 @@
                       </button>
                     </router-link>
                     <button
+                      @click="deleteUser(user.id)"
                       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       <svg class="h-4 w-4 text-white hover:text-blue-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -85,7 +86,10 @@
 
 <script>
 import axios from 'axios'
-
+import router from '../../router'
+const config = {
+    headers: { Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY0ODA5MjQ5OCwiZXhwIjoxNjQ4MDk2MDk4LCJuYmYiOjE2NDgwOTI0OTgsImp0aSI6IjV1RmlkTHJjd0tyZ1ZZdW4iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.NXFzv1E-F6Lav3AtY58lMMbQOSfBThdRZIjcSavrwYY` }
+};
 export default {
     name: 'TableCards',
     data() {
@@ -93,11 +97,22 @@ export default {
         users: [],
       }
     },
+    
     created() {
-      axios.get(`http://127.0.0.1:8000/api/person/`)
+      axios.get(
+        `http://127.0.0.1:8000/api/user/`,
+        config
+      )
       .then((response) => {
+        console.log(response.data.data);
         this.users = response.data.data;
       })
     },
+    methods: {
+      deleteUser(id){
+        axios.delete(`http://127.0.0.1:8000/api/user/${id}`);
+        router.replace({ path: '/' })
+      }
+    }
   }
 </script>

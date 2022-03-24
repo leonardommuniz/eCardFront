@@ -1,5 +1,6 @@
 <template>
   <router-view></router-view>
+<fa icon="coffee"/>
 </template>
 
 <script>
