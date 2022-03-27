@@ -6,12 +6,12 @@ import Card from './views/Card';
 
 const routes = [
     {
-        path:'/login',
+        path:'/',
         name:'login',
         component: Login
     },
     {
-        path:'/',
+        path:'/home',
         name:'home',
         component: Home
     },

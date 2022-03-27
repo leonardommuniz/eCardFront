@@ -61,7 +61,15 @@ export default {
                 "email": this.userEmail,
                 "password":this.userPassword
             }
-        ).then(console.log).catch(console.log);
+        ).then((res) =>{
+            sessionStorage.setItem('access_token', res.data.access_token);
+           
+            this.$router.push('home') 
+        }).catch(() =>{
+            alert("Dados invalidos")
+        }
+            
+        );
       }
     }
 };

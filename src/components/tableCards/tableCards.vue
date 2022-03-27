@@ -87,8 +87,9 @@
 <script>
 import axios from 'axios'
 import router from '../../router'
+let token = sessionStorage.getItem('access_token');
 const config = {
-    headers: { Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY0ODA5MjQ5OCwiZXhwIjoxNjQ4MDk2MDk4LCJuYmYiOjE2NDgwOTI0OTgsImp0aSI6IjV1RmlkTHJjd0tyZ1ZZdW4iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.NXFzv1E-F6Lav3AtY58lMMbQOSfBThdRZIjcSavrwYY` }
+    headers: { Authorization: `Bearer ${token}` }
 };
 export default {
     name: 'TableCards',
@@ -100,7 +101,7 @@ export default {
     
     created() {
       axios.get(
-        `http://127.0.0.1:8000/api/user/`,
+        `http://127.0.0.1:8000/api/card/card-user`,
         config
       )
       .then((response) => {
